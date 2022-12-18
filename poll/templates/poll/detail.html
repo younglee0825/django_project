@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% block title %}
+    detail
+{% endblock %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+     <link rel="stylesheet" type="text/css" href="{% static 'poll/style.css' %}">
+</head>
+<body>
+<h3>{{question.question_text}}</h3>
+{% if error_message %} <p> <strong>{{error_message}}</strong></p>{% endif %}
+
+<form action="{% url 'poll:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <!--<input type ="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">-->
+    <input type ="checkbox" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}" multiple>
+    <label for ="choice{{forloop.counter}}">{{choice.choice_text}}</label><br>
+{% endfor %}
+<input type="submit" value="Vote">
+</form><br>
+
+<a href="/poll/">질문 선택으로 돌아가기</a>
+</body>
+
+{% endblock %}

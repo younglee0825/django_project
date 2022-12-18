@@ -1,0 +1,10 @@
+body{
+    background:white url("image/poll.png") no-repeat;
+    background-position:right bottom;
+    background-size : 100px 100px
+}
+
+li a{color: blue;
+    text-decoration: none;}
+
+h3{font size }
